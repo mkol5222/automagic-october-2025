@@ -22,6 +22,9 @@ management-az:
 cpman-ssh: management-ssh
 cpman-api: management-api
 cpman-info: management-info
+cpman-serial: management-serial
+
+cpman: management-up management-api policy management-info
 
 vmss: vmss-up
 vmss-up:
