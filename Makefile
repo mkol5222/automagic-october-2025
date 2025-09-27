@@ -73,4 +73,4 @@ linux-fwoff:
 er:
 	./scripts/er.sh
 
-
+down: linux-down vmss-down management-down
