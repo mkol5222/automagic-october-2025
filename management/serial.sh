@@ -15,3 +15,5 @@ az config set extension.dynamic_install_allow_preview=true
 az provider register --namespace Microsoft.Support
 az provider register --namespace Microsoft.SerialConsole
 az serial-console connect --resource-group $RG --name "${NAME}" 
+
+
