@@ -46,3 +46,5 @@ terraform.rc
 # planout
 .env.keys
 .env
+policy/sid.json
+policy/fingerprints.json

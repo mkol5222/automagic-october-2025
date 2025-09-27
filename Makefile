@@ -31,3 +31,11 @@ vmss-ssh:
 vmss-info:
 	cd vmss && ./info.sh
 
+
+### POLICY
+
+policy: policy-up
+
+policy-up:
+	cd policy && ./up.sh
+
