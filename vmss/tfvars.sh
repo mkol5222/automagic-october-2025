@@ -19,8 +19,8 @@ TF_VAR_VMSS_SIC_KEY=$(dotenvx get -f ../.env -fk ../.env.keys TF_VAR_VMSS_SIC_KE
 # if not defined or empty
 if [ -z "$TF_VAR_VMSS_SIC_KEY" ]; then
   echo "Error: TF_VAR_VMSS_SIC_KEY is not set or is empty." >&2
-  # generate a random key with openssl
-  TF_VAR_VMSS_SIC_KEY=$(openssl rand -base64 32)
+  # generate a random key with openssl - make sure it has only alphanumeric characters
+  TF_VAR_VMSS_SIC_KEY=$(openssl rand -base64 32 | tr -dc '[:alnum:]' | cut -c1-32)
   echo "Generated random key: $TF_VAR_VMSS_SIC_KEY"
   dotenvx set -f ../.env -fk ../.env.keys TF_VAR_VMSS_SIC_KEY "$TF_VAR_VMSS_SIC_KEY"
   echo "Saved to .env file."

@@ -18,6 +18,9 @@ management-api:
 management-az:
 	cd management && ./az.sh
 
+# alias
+cpman-ssh: management-ssh
+cpman-api: management-api
 
 vmss: vmss-up
 vmss-up:
@@ -30,7 +33,8 @@ vmss-ssh:
 	cd vmss && ./ssh.sh
 vmss-info:
 	cd vmss && ./info.sh
-
+vmss-cme:
+	cd vmss && ./cme.sh
 
 ### POLICY
 

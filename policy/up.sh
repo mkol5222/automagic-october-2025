@@ -22,11 +22,14 @@ Management server info:
 
 EOF
 
+MYIP=$(curl -s https://ipinfo.io/ip)
+echo "My public IP is: $MYIP"
 
+export TF_VAR_myip="$MYIP"
 
 rm sid.json || true # forget previous session
-terraform init
-if (terraform apply -auto-approve); then 
+dotenvx run -f ../.env -fk ../.env.keys -- terraform init
+if (dotenvx run -f ../.env -fk ../.env.keys -- terraform apply -auto-approve); then
 	echo "Terraform apply succeeded";
     export SID=$(jq -r .sid ./sid.json)
 	./publish.sh "$SID";

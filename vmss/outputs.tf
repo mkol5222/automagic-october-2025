@@ -18,3 +18,9 @@ output "admin_password" {
   value = var.VMSS_ADMIN_PASSWORD
   sensitive = true
 }
+
+output "sic_key" {
+  value     = var.VMSS_SIC_KEY
+  sensitive = true
+  
+}

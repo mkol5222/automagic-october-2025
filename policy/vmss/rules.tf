@@ -5,24 +5,24 @@ locals {
 
 data "checkpoint_management_data_access_rule" "data_access_rule" {
   depends_on = [checkpoint_management_package.vmss]
-  name = "Cleanup rule"
-  layer = local.layer_name
+  name       = "Cleanup rule"
+  layer      = local.layer_name
 }
 
 ####
 #
 # Cleanup section 
 resource "checkpoint_management_access_section" "cleanup_section" {
-  name = "Cleanup"
-  position = {above  = data.checkpoint_management_data_access_rule.data_access_rule.id}
-   layer = local.layer_name
+  name     = "Cleanup"
+  position = { above = data.checkpoint_management_data_access_rule.data_access_rule.id }
+  layer    = local.layer_name
 }
 
 ### VNETs egress section
 resource "checkpoint_management_access_section" "vnet_egress_section" {
-  name = "VNETs egress section"
-  position = {above  = checkpoint_management_access_section.cleanup_section.id}
-   layer = local.layer_name
+  name     = "VNETs egress section"
+  position = { above = checkpoint_management_access_section.cleanup_section.id }
+  layer    = local.layer_name
 }
 
 # allow all traffic from VNETs
@@ -52,17 +52,17 @@ resource "checkpoint_management_access_rule" "vnet_egress" {
 
 ### VNETs ingress section
 resource "checkpoint_management_access_section" "vnet_ingress_section" {
-  name = "VNETs ingress section"
-  position = {above  = checkpoint_management_access_section.vnet_egress_section.id}
-   layer = local.layer_name
+  name     = "VNETs ingress section"
+  position = { above = checkpoint_management_access_section.vnet_egress_section.id }
+  layer    = local.layer_name
 }
 
 # allow SSH to instances
 resource "checkpoint_management_access_rule" "vnet_ingress" {
-  name        = "VMSS instances ingress"
+  name        = "VMSS instances management"
   layer       = local.layer_name
   position    = { below = checkpoint_management_access_section.vnet_ingress_section.id }
-  source      = ["Any"]
+  source      = ["myip"]
   destination = [checkpoint_management_dynamic_object.LocalGatewayExternal.id]
   service     = ["ssh_version_2"]
   content     = ["Any"]
