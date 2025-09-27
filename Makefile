@@ -23,6 +23,7 @@ cpman-ssh: management-ssh
 cpman-api: management-api
 cpman-info: management-info
 cpman-serial: management-serial
+cpman-down: management-down
 
 cpman: management-up management-api policy management-info
 
