@@ -44,3 +44,9 @@ policy: policy-up
 policy-up:
 	cd policy && ./up.sh
 
+
+### utils
+er:
+	./scripts/er.sh
+
+
