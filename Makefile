@@ -44,6 +44,19 @@ policy: policy-up
 policy-up:
 	cd policy && ./up.sh
 
+### LINUX
+
+linux: linux-up
+linux-up:
+	cd linux && ./up.sh
+linux-down:
+	cd linux && ./down.sh
+linux-serial:
+	cd linux && ./serial.sh
+linux-ssh:
+	cd linux && ./ssh.sh
+linux-info:
+	cd linux && ./info.sh
 
 ### utils
 er:
