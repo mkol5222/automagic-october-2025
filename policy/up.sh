@@ -27,6 +27,9 @@ echo "My public IP is: $MYIP"
 
 export TF_VAR_myip="$MYIP"
 
+export CHECKPOINT_SESSION_NAME="TF VMSS policy $(whoami) $(date) from $(hostname)"
+export CHECKPOINT_SESSION_DESCRIPTION="Terraform session description $(date)"
+
 rm sid.json || true # forget previous session
 dotenvx run -f ../.env -fk ../.env.keys -- terraform init
 if (dotenvx run -f ../.env -fk ../.env.keys -- terraform apply -auto-approve); then

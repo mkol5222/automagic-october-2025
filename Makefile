@@ -21,6 +21,7 @@ management-az:
 # alias
 cpman-ssh: management-ssh
 cpman-api: management-api
+cpman-info: management-info
 
 vmss: vmss-up
 vmss-up:

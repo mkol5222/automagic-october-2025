@@ -23,7 +23,7 @@ echo "Run these commands one by one at cpman SSH prompt."
 echo "  Hint: No need to restart CME after fist command"
 echo 
 echo
-echo autoprov_cfg init Azure -mn mgmt -tn vmss_template -otp \'$OTP\' -ver R82 -po vmss -cn ctrl -sb $SUBSCRIPTION_ID -at $TENANT_ID -aci $CLIENT_ID -acs \'$CLIENT_SECRET\'
+echo autoprov_cfg init Azure -mn mgmt -tn vmss_template -otp \'$OTP\' -ver R82 -po VMSS -cn ctrl -sb $SUBSCRIPTION_ID -at $TENANT_ID -aci $CLIENT_ID -acs \'$CLIENT_SECRET\'
 echo 
 echo autoprov_cfg set template -tn vmss_template -ia -ips
 echo
