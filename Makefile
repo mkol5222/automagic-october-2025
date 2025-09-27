@@ -28,3 +28,6 @@ vmss-serial:
 	cd vmss && ./serial.sh
 vmss-ssh:
 	cd vmss && ./ssh.sh
+vmss-info:
+	cd vmss && ./info.sh
+
