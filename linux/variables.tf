@@ -22,3 +22,14 @@ variable "subscriptionId" {
   description = "The Subscription ID which should be used."
   type        = string
 }
+
+variable "fw_enabled" {
+  description = "Enable Route via Firewall"
+  type        = bool
+  default     = false
+}
+
+variable "myip" {
+    description = "Your public IP address for management access."
+    type        = string
+}

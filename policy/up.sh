@@ -24,7 +24,6 @@ EOF
 
 MYIP=$(curl -s https://ipinfo.io/ip)
 echo "My public IP is: $MYIP"
-
 export TF_VAR_myip="$MYIP"
 
 export CHECKPOINT_SESSION_NAME="TF VMSS policy $(whoami) $(date) from $(hostname)"
