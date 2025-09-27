@@ -17,5 +17,5 @@
             ]
         }
     },
-    "postCreateCommand": "(curl -sfS https://dotenvx.sh | sudo sh); sudo apt-get update && sudo apt-get install -y sshpass age zoxide fzf bat exa ripgrep fd-find; curl -L -o /tmp/sops.deb https://github.com/getsops/sops/releases/download/v3.10.2/sops_3.10.2_amd64.deb; sudo apt install -y /tmp/sops.deb"
+    "postCreateCommand": "(curl -sfS https://dotenvx.sh | sudo sh); sudo apt-get update && sudo apt-get install -y sshpass age zoxide fzf bat exa ripgrep fd-find; curl -L -o /tmp/sops.deb https://github.com/getsops/sops/releases/download/v3.10.2/sops_3.10.2_amd64.deb; sudo apt install -y /tmp/sops.deb; echo >> ~/.bashrc; echo 'eval \"$(zoxide init bash)\"' >> ~/.bashrc; echo 'alias bat=\"batcat\"' >> ~/.bashrc; echo 'alias ls=\"exa --group-directories-first\"' >> ~/.bashrc; echo 'alias fd=\"fdfind\"' >> ~/.bashrc"
 }
