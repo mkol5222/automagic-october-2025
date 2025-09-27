@@ -22,5 +22,17 @@ Management server info:
 
 EOF
 
+
+
+rm sid.json || true # forget previous session
 terraform init
-terraform apply -auto-approve
+if (terraform apply -auto-approve); then 
+	echo "Terraform apply succeeded";
+    export SID=$(jq -r .sid ./sid.json)
+	./publish.sh "$SID";
+else
+    echo "Terraform apply failed";
+    export SID=$(jq -r .sid ./sid.json)
+	./discard.sh "$SID"; 
+fi
+echo "Policy: Done."
