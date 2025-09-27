@@ -25,6 +25,31 @@ resource "checkpoint_management_access_section" "vnet_egress_section" {
   layer    = local.layer_name
 }
 
+# checkpoint_management_data_center_query.appLinux1 -> Internet
+resource "checkpoint_management_access_rule" "appLinux1_internet" {
+  name        = "app=linux1 to Internet"
+  layer       = local.layer_name
+  position    = { above = checkpoint_management_access_rule.vnet_egress.id }
+  source      = [checkpoint_management_data_center_query.appLinux1.id]
+  destination = ["Any"]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
 # allow all traffic from VNETs
 resource "checkpoint_management_access_rule" "vnet_egress" {
   name        = "VNETs egress"
