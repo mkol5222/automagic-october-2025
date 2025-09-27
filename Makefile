@@ -58,6 +58,13 @@ linux-ssh:
 linux-info:
 	cd linux && ./info.sh
 
+fwon: linux-fwon
+fwoff: linux-fwoff
+linux-fwon:
+	cd linux && ./fwon.sh
+linux-fwoff:
+	cd linux && ./fwoff.sh
+
 ### utils
 er:
 	./scripts/er.sh
