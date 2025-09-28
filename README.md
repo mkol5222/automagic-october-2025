@@ -73,9 +73,10 @@ Optional: once Management VM exists, you can monitor initialization progress on 
 make cpman-serial
 ```
 
-## Check Point CloudGuard Network Security gateways deployed as
 
-Progress only after you have Check Point Security Management deployed and ready.
+## Check Point CloudGuard Network Security gateways deployed as Azure VMSS
+
+Continue to this step only after you have Check Point Security Management deployed and ready.
 You should be able to login to it using SmartConsole R82 and see policy package called `VMSS` first.
 
 In your CodeSpace/DevContainer new terminal run:
@@ -97,6 +98,7 @@ make cpman-ssh
 
 # monitor cme.log on management or use SmartConsole logs view of blade:CME
 ```
+
 
 ## Linux test VM
 
