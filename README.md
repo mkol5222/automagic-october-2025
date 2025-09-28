@@ -105,7 +105,7 @@ Lets deploy Linux VM to be protected by Check Point CloudGuard Network Security 
 In your CodeSpace/DevContainer terminal run:
 ```bash
 time make linux
-# expected time to finish ~3 minutes
+# expected time to finish ~5 minutes or less
 ```
 
 Once Linux is deployed, you can SSH to it using:
