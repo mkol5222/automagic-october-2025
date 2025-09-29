@@ -22,3 +22,9 @@ variable "cluster_sic_key" {
   description = "Cluster SIC Key"
   type        = string
 }
+
+variable "fw_enabled" {
+  description = "Enable Route via Firewall"
+  type        = bool
+  default     = false
+}

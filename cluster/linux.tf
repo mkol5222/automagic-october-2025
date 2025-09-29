@@ -8,4 +8,5 @@ module "linux" {
   envId            = local.envId
   myip             = local.myip
 
+  fw_enabled = var.fw_enabled
 }
