@@ -82,6 +82,8 @@ cluster-ssh:
 	cd cluster && ./ssh.sh
 cluster-info:
 	cd cluster && ./info.sh
+cluster-cme:
+	cd cluster && ./cme.sh
 
 ### utils
 er:

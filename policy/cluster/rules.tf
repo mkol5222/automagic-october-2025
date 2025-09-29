@@ -50,3 +50,28 @@ resource "checkpoint_management_access_rule" "vnet_egress" {
   vpn             = "Any"
   action          = "Accept"
 }
+
+# allow SSH to nodes from my IP
+resource "checkpoint_management_access_rule" "ssh_cluster_nodes" {
+  name        = "cluster nodes management"
+  layer       = local.layer_name
+  position    = { above = checkpoint_management_access_rule.vnet_egress.id }
+  source      = ["myip"]
+  destination = ["ha1", "ha2"]
+  service     = ["ssh_version_2"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
