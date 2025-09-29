@@ -86,7 +86,7 @@ cluster-cme:
 	cd cluster && ./cme.sh
 
 cluster-linux-ssh:
-	cd cluster && ./linux-ssh.sh
+	cd cluster && ./ssh-linux.sh
 cluster-pass-reset:
 	cd cluster && ./pass-reset.sh 0
 	cd cluster && ./pass-reset.sh 1
@@ -95,9 +95,13 @@ cluster-ssh1:
 	cd cluster && ./ssh.sh 0
 cluster-ssh2:
 	cd cluster && ./ssh.sh 1
+cluster-fwon:
+	cd cluster && ./fwon.sh
+cluster-fwoff:
+	cd cluster && ./fwoff.sh
 
 ### utils
 er:
 	./scripts/er.sh
 
-down: linux-down vmss-down management-down
+down: linux-down vmss-down cluster-down management-down
