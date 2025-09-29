@@ -69,6 +69,20 @@ linux-fwon:
 linux-fwoff:
 	cd linux && ./fwoff.sh
 
+### CLUSTER
+
+cluster: cluster-up
+cluster-up:
+	cd cluster && ./up.sh
+cluster-down:
+	cd cluster && ./down.sh
+cluster-serial:
+	cd cluster && ./serial.sh
+cluster-ssh:
+	cd cluster && ./ssh.sh
+cluster-info:
+	cd cluster && ./info.sh
+
 ### utils
 er:
 	./scripts/er.sh
