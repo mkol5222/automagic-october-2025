@@ -85,6 +85,17 @@ cluster-info:
 cluster-cme:
 	cd cluster && ./cme.sh
 
+cluster-linux-ssh:
+	cd cluster && ./linux-ssh.sh
+cluster-pass-reset:
+	cd cluster && ./pass-reset.sh 0
+	cd cluster && ./pass-reset.sh 1
+cluster-ssh: cluster-ssh1
+cluster-ssh1:
+	cd cluster && ./ssh.sh 0
+cluster-ssh2:
+	cd cluster && ./ssh.sh 1
+
 ### utils
 er:
 	./scripts/er.sh

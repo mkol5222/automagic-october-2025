@@ -57,7 +57,7 @@ resource "checkpoint_management_access_rule" "ssh_cluster_nodes" {
   layer       = local.layer_name
   position    = { above = checkpoint_management_access_rule.vnet_egress.id }
   source      = ["myip"]
-  destination = ["ha1", "ha2"]
+  destination = ["Any"] // ["ha1", "ha2"]
   service     = ["ssh_version_2"]
   content     = ["Any"]
   time        = ["Any"]
