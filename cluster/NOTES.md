@@ -12,4 +12,7 @@ make cpman-info
 # deploy cluster
 time make cluster
 
+# add cluster to SmartConsole with command from
+name cluster-cme
+
 ```
