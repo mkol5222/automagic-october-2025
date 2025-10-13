@@ -75,6 +75,31 @@ resource "checkpoint_management_access_rule" "vnet_egress" {
   action          = "Accept"
 }
 
+# allow traffic to feeds from VNETs
+resource "checkpoint_management_access_rule" "vnet_egress_feeds" {
+  name        = "VNETs egress to feeds"
+  layer       = local.layer_name
+  position    = { above = checkpoint_management_access_rule.vnet_egress.id }
+  source      = [checkpoint_management_network.vmss_vnet.id]
+  destination = [checkpoint_management_network_feed.vmss_feedME.id, checkpoint_management_network_feed.vmss_quiccloud.id]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
 ### VNETs ingress section
 resource "checkpoint_management_access_section" "vnet_ingress_section" {
   name     = "VNETs ingress section"

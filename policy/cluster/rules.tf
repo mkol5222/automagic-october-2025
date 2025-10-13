@@ -51,6 +51,32 @@ resource "checkpoint_management_access_rule" "vnet_egress" {
   action          = "Accept"
 }
 
+# allow traffic to feeds from VNETs
+resource "checkpoint_management_access_rule" "vnet_egress_feeds" {
+  name        = "VNETs egress to feeds"
+  layer       = local.layer_name
+  position    = { above = checkpoint_management_access_rule.vnet_egress.id }
+  source      = ["Any"]
+  destination = [checkpoint_management_network_feed.cl_feedME.id, checkpoint_management_network_feed.cl_quiccloud.id]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
+
 # allow SSH to nodes from my IP
 resource "checkpoint_management_access_rule" "ssh_cluster_nodes" {
   name        = "cluster nodes management"
