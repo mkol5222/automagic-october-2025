@@ -7,6 +7,17 @@ resource "azurerm_route_table" "appgw-rt" {
   #disable_bgp_route_propagation = false
 
 
+# 10.69.200.4
+  dynamic "route" {
+    for_each = var.fw_enabled ? [1] : []
+    content {
+      name                   = "to-services-via-fw"
+      address_prefix         = "10.69.200.0/24"
+      next_hop_type          = "VirtualAppliance"
+      next_hop_in_ip_address = "10.69.2.4"
+    }
+  }
+
 
   route {
     name           = "route-to-my-pub-ip"

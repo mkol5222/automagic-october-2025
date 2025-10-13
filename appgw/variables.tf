@@ -32,3 +32,9 @@ variable "myip" {
   description = "Your public IP address (DevOps station)"
   type        = string
 }
+
+variable "fw_enabled" {
+  description = "Enable Route via Firewall"
+  type        = bool
+  default     = false
+}
