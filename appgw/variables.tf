@@ -27,3 +27,8 @@ variable "appgw_subnet_cidr" {
     description = "The address to use for the Application Gateway subnet."
     type        = string
 }
+
+variable "myip" {
+  description = "Your public IP address (DevOps station)"
+  type        = string
+}
