@@ -1,5 +1,5 @@
 resource "checkpoint_management_network_feed" "vmss_feedME" {
-  name     = "vmss_feed_serv_ip"
+  name     = "feed_dev_cicd-jenkins"
   feed_url = "https://feed-serv.deno.dev/ip"
   #   username = "feed_username"
   #   password = "feed_password"

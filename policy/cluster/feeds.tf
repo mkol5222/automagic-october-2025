@@ -1,5 +1,5 @@
 resource "checkpoint_management_network_feed" "cl_feedME" {
-  name     = "cl_feed_serv_ip"
+  name     = "feed_dev_airflow"
   feed_url = "https://feed-serv.deno.dev/ip"
   #   username = "feed_username"
   #   password = "feed_password"
