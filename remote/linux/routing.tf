@@ -20,7 +20,7 @@ resource "azurerm_route_table" "linux-rt" {
       name                   = "to-internet-via-fw"
       address_prefix         = "0.0.0.0/0"
       next_hop_type          = "VirtualAppliance"
-      next_hop_in_ip_address = "10.69.2.4"
+      next_hop_in_ip_address = "10.200.2.4"
     }
   }
 

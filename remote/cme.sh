@@ -7,9 +7,9 @@ SIC_KEY=$(dotenvx get -f ../.env -fk ../.env.keys TF_VAR_cluster_sic_key)
 VERSION="R82"
 
 RG=$(terraform output -raw rg)
-CLUSTER_NAME=$(terraform output -raw name)
-NODE1_NAME="ha1"
-NODE2_NAME="ha2"
+CLUSTER_NAME="remote-$(terraform output -raw name)"
+NODE1_NAME="remote-ha1"
+NODE2_NAME="remote-ha2"
 
 # obtain various IPs from Azure inventory using AZ cli
 # Public IPs are ha, ha1_IP and ha2_IP

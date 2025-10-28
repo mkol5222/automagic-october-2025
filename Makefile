@@ -85,6 +85,9 @@ cluster-info:
 cluster-cme:
 	cd cluster && ./cme.sh
 
+remote-linux-ssh:
+	cd remote && ./ssh-linux.sh
+
 cluster-linux-ssh:
 	cd cluster && ./ssh-linux.sh
 cluster-pass-reset:
