@@ -4,7 +4,7 @@ set -euo pipefail
 
 
 RG=$(terraform output -raw rg)
-NAME=$(terraform output -raw name)
+NAME="$(terraform output -raw name)"
 
 ADMIN_PASSWORD=$(dotenvx get -f ../.env -fk ../.env.keys  TF_VAR_cluster_admin_password)
 
@@ -52,8 +52,8 @@ EOF
 
 # instance+1
 IID=$((INSTANCE+1))
-echo "Resetting password on instance ha$IID"
-INAME="${NAME}$IID"
+echo "Resetting password on instance remote-ha$IID"
+INAME="remote-${NAME}$IID"
 echo "Instance name: $INAME"
 ####
 (cd ../management/; ./ssh.sh mgmt_cli -r true run-script targets "$INAME" script-name "Reset_Gateway_Password" script-base64 "$SCRIPT")
