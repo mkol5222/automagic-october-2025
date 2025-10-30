@@ -48,3 +48,6 @@ terraform.rc
 .env
 policy/sid.json
 policy/fingerprints.json
+
+_flowlogs/
+
