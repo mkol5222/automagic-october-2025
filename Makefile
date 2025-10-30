@@ -17,6 +17,10 @@ management-api:
 	cd management && ./api.sh
 management-az:
 	cd management && ./az.sh
+management-start:
+	cd management && ./startvm.sh
+management-stop:
+	cd management && ./stopvm.sh
 
 # alias
 cpman-ssh: management-ssh
@@ -24,6 +28,8 @@ cpman-api: management-api
 cpman-info: management-info
 cpman-serial: management-serial
 cpman-down: management-down
+cpman-start: management-start management-api
+cpman-stop: management-stop
 
 cpman: management-up management-api policy management-info
 
