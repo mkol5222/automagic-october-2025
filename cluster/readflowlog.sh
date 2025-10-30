@@ -9,14 +9,15 @@
 
 set -euo pipefail
 
-if [ $# -lt 1 ]; then
-  echo "❌ Usage: $0 <storage-account-name> [--follow]"
-  exit 1
-fi
+# if [ $# -lt 1 ]; then
+#   echo "❌ Usage: $0 <storage-account-name> [--follow]"
+#   exit 1
+# fi
 
-STORAGE_ACCOUNT="$1"
-CONTAINER="insights-logs-networksecuritygroupflowevent"
-FOLLOW=${2:-""}
+#STORAGE_ACCOUNT="$1"
+STORAGE_ACCOUNT=$(terraform output -raw flowlogs_sa)
+CONTAINER="insights-logs-flowlogflowevent"
+FOLLOW=""
 
 echo "🔍 Monitoring NSG flow logs in storage account: $STORAGE_ACCOUNT"
 echo "📦 Container: $CONTAINER"
@@ -38,40 +39,41 @@ while true; do
     echo "📄 New flow log found: $LATEST_BLOB"
     echo "⏳ Reading and decoding..."
 
+    TMPFILE=$(mktemp)
     az storage blob download \
-      --account-name "$STORAGE_ACCOUNT" \
-      --container-name "$CONTAINER" \
-      --name "$LATEST_BLOB" \
-      --file - 2>/dev/null |
-      jq -r '
-        .records[].properties.flows[].flows[].flowTuples[]? 
-        | split(",") 
-        | {
-            timestamp: (.[0] | tonumber | todateiso8601),
-            srcIp: .[1],
-            destIp: .[2],
-            srcPort: .[3],
-            destPort: .[4],
-            protocol: .[5],
-            direction: .[6],
-            action: .[7]
-          }
-      '
+    --account-name "$STORAGE_ACCOUNT" \
+    --container-name "$CONTAINER" \
+    --name "$LATEST_BLOB" \
+    --file "$TMPFILE" --no-progress >/dev/null 2>/dev/null
+
+    jq -r . "$TMPFILE" | less
+    rm "$TMPFILE"
+    # az storage blob download \
+    #   --account-name "$STORAGE_ACCOUNT" \
+    #   --container-name "$CONTAINER" \
+    #   --name "$LATEST_BLOB" \
+    #   --file - 2>/dev/null | jq -r .
+    #   jq -r '
+    #     .records[].properties.flows[].flows[].flowTuples[]? 
+    #     | split(",") 
+    #     | {
+    #         timestamp: (.[0] | tonumber | todateiso8601),
+    #         srcIp: .[1],
+    #         destIp: .[2],
+    #         srcPort: .[3],
+    #         destPort: .[4],
+    #         protocol: .[5],
+    #         direction: .[6],
+    #         action: .[7]
+    #       }
+    #   '
 
     LAST_BLOB="$LATEST_BLOB"
     echo "✅ Processed at $(date)"
     echo
-  else
-    if [ "$FOLLOW" != "--follow" ]; then
-      echo "✅ No new logs. Exiting."
-      break
-    fi
+  
   fi
 
-  if [ "$FOLLOW" == "--follow" ]; then
-    sleep 60  # Check every 60 seconds for new logs
-  else
-    break
-  fi
+  
 done
 echo "👋 Done."
