@@ -16,7 +16,7 @@ resource "azurerm_network_watcher" "flowlogs" {
 }
 
 resource "azurerm_storage_account" "flowlogs" {
-  name                = "watcher-flowlogs-${var.envId}"
+  name                = "watcherflowlogs${var.envId}"
   resource_group_name = azurerm_resource_group.flowlogs.name
   location            = azurerm_resource_group.flowlogs.location
 

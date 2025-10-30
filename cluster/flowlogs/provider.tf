@@ -1,9 +1,3 @@
-# azapi
-
-# provider "azapi" {
-#   # features {}
-# }
-
 terraform {
   required_providers {
     azapi = {

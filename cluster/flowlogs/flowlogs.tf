@@ -1,7 +1,7 @@
 resource "azapi_resource" "vnet_flow_log" {
   type      = "Microsoft.Network/networkWatchers/flowLogs@2023-09-01"
   name      = "vnet-flowlog-example"
-  parent_id = azurerm_network_watcher.example.id
+  parent_id = azurerm_network_watcher.flowlogs.id
 
   body = jsonencode({
     properties = {
