@@ -33,17 +33,17 @@ resource "azurerm_storage_account" "flowlogs" {
 #   sku                 = "PerGB2018"
 # }
 
-resource "azurerm_network_watcher_flow_log" "flowlogs" {
-  network_watcher_name = azurerm_network_watcher.flowlogs.name
-  resource_group_name  = azurerm_resource_group.flowlogs.name
-  name                 = "watcher-flowlogs-${var.envId}"
+# resource "azurerm_network_watcher_flow_log" "flowlogs" {
+#   network_watcher_name = azurerm_network_watcher.flowlogs.name
+#   resource_group_name  = azurerm_resource_group.flowlogs.name
+#   name                 = "watcher-flowlogs-${var.envId}"
 
-  target_resource_id   = var.cluster_vnet_id
-  storage_account_id = azurerm_storage_account.flowlogs.id
-  enabled            = true
+#   target_resource_id   = var.cluster_vnet_id
+#   storage_account_id = azurerm_storage_account.flowlogs.id
+#   enabled            = true
 
-  retention_policy {
-    enabled = true
-    days    = 7
-  }
-}
+#   retention_policy {
+#     enabled = true
+#     days    = 7
+#   }
+# }

@@ -1,0 +1,5 @@
+# azapi
+
+provider "azapi" {
+  features {}
+}
