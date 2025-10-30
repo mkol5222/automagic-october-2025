@@ -1,9 +1,10 @@
 resource "azapi_resource" "vnet_flow_log" {
   type      = "Microsoft.Network/networkWatchers/flowLogs@2023-09-01"
   name      = "vnet-flowlog-example"
-  parent_id = azurerm_network_watcher.flowlogs.id
+  parent_id = data.azurerm_network_watcher.watcher.id
 
-  body = jsonencode({
+  body = {
+    location = data.azurerm_network_watcher.watcher.location
     properties = {
       enabled           = true
       format            = { type = "JSON", version = 2 }
@@ -17,6 +18,7 @@ resource "azapi_resource" "vnet_flow_log" {
     #   }
       targetResourceId = var.cluster_vnet_id
       storageId        = azurerm_storage_account.flowlogs.id
+      
     }
-  })
+  }
 }

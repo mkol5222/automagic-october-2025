@@ -20,3 +20,8 @@ output "linux_ip" {
     value       = module.linux.linux_ip
     description = "Linux VM Public IP"
 }
+
+output "flowlogs_sa" {
+    value       = module.flowlogs.sa
+    description = "Flowlogs Storage Account Name"
+}

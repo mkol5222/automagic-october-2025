@@ -9,10 +9,17 @@ resource "azurerm_resource_group" "flowlogs" {
 #   resource_group_name = azurerm_resource_group.example.name
 # }
 
-resource "azurerm_network_watcher" "flowlogs" {
-  name                = "watcher-flowlogs-${var.envId}"
-  location            = azurerm_resource_group.flowlogs.location
-  resource_group_name = azurerm_resource_group.flowlogs.name
+# resource "azurerm_network_watcher" "flowlogs" {
+#   name                = "watcher-flowlogs-${var.envId}"
+#   location            = azurerm_resource_group.flowlogs.location
+#   resource_group_name = azurerm_resource_group.flowlogs.name
+# }
+
+# data watcher NetworkWatcher_northeurope
+
+data "azurerm_network_watcher" "watcher" {
+  name                = "NetworkWatcher_${var.cluster_location}"
+  resource_group_name = "NetworkWatcherRG"
 }
 
 resource "azurerm_storage_account" "flowlogs" {
