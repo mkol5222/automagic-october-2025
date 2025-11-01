@@ -54,3 +54,58 @@ Traceback (most recent call last):
     raise JSONDecodeError("Expecting value", s, err.value) from None
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 ```
+
+```
+curl_cli -H 'Metadata:true' 'http://169.254.169.254/metadata/instance?api-version=2019-06-01' 
+
+# 2023-07-01
+
+curl_cli -H 'Metadata:true' 'http://169.254.169.254/metadata/instance?api-version=2023-07-01' 
+
+curl_cli -I http://169.254.169.254
+
+curl_cli -H "Metadata:true" "http://169.254.169.254/metadata/instance?api-version=2023-07-01" 
+
+```
+
+```shell
+az vm list | jq -r '.[].id'
+/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLINUX-639EC4AE/providers/Microsoft.Compute/virtualMachines/automagic-clinux-639ec4ae
+/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLUSTER-639EC4AE/providers/Microsoft.Compute/virtualMachines/ha1
+/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLUSTER-639EC4AE/providers/Microsoft.Compute/virtualMachines/ha2
+/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-MANAGEMENT-639EC4AE/providers/Microsoft.Compute/virtualMachines/cpman-639ec4ae
+
+$ az monitor metrics list-namespaces --resource /subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLUSTER-639EC4AE/providers/Microsoft.Compute/virtualMachines/ha1 -o table
+This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus
+Classification    Metric Namespace Name
+----------------  ---------------------------------
+Platform          Microsoft.Compute/virtualMachines
+Custom            CloudGuard
+
+az monitor metrics --help
+az monitor metrics list-definitions
+
+VM=/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLUSTER-639EC4AE/providers/Microsoft.Compute/virtualMachines/ha1 
+
+az monitor metrics list-namespaces --resource $VM -o table
+
+az monitor metrics list-definitions --resource $VM --namespace CloudGuard -o table
+az monitor metrics list-definitions --resource $VM --namespace CloudGuard -o json
+az monitor metrics list-definitions --resource $VM --namespace CloudGuard -o json | jq -r '.[] |.name.value'
+az monitor metrics list-definitions --resource $VM --namespace CloudGuard -o json | jq -r '.[] |.id' | grep "Num"
+
+M='Num. connections'
+M1='/subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d/resourceGroups/AUTOMAGIC-CLUSTER-639EC4AE/providers/Microsoft.Compute/virtualMachines/ha1/providers/microsoft.insights/metricdefinitions/CloudGuard/Num. connections'
+az monitor metrics --help
+
+az monitor --help
+
+echo az monitor metrics list   --resource $VM   --metric "$M"   --namespace CloudGuard   --interval PT1M   -o table
+az monitor metrics list   --resource $VM   --metric "$M1"  
+
+az monitor metrics list --resource $VM --metric "Percentage CPU"
+
+cat $FWDIR/conf/cloud_cpstat_parser.json
+
+
+az monitor diagnostic-settings list --resource $VM
