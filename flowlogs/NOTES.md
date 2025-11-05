@@ -39,6 +39,8 @@ ls -rt ../_flowlogs/tmp* | xargs cat | jq -r '.records[]| .flowRecords.flows[] |
 # add rule name
 ls -rt ../_flowlogs/tmp* | xargs cat | jq -r '.records[]| .macAddress as $mac |.flowRecords.flows[] | .flowGroups[]| .rule as $rule | .flowTuples[] | "\(.),\($rule),\($mac)" '  | grep 10.200.200.4 | sort -t, -k1,1
 
+ls -rt ../_flowlogs/tmp* | xargs cat | jq -r '.records[]| .macAddress as $mac |.flowRecords.flows[] | .flowGroups[]| .rule as $rule | .flowTuples[] | "\(.),\($rule),\($mac)" '  | grep 10.69.200.4 | sort -t, -k1,1
+
 # 34.160.111.145
 ls -rt ../_flowlogs/tmp* | xargs cat | jq -r '.records[]| .macAddress as $mac |.flowRecords.flows[] | .flowGroups[]| .rule as $rule | .flowTuples[] | "\(.),\($rule),\($mac)" '  | grep 34.160.111.145 | sort -t, -k1,1
 
