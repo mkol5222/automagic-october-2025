@@ -13,7 +13,7 @@ TF_VAR_vwan_sic_key=$(dotenvx get -f ../.env -fk ../.env.keys TF_VAR_vwan_sic_ke
 if [ -z "$TF_VAR_vwan_sic_key" ]; then
   echo "Error: TF_VAR_vwan_sic_key is not set or is empty." >&2
   # generate a random key with openssl - make sure it has only alphanumeric characters
-  TF_VAR_vwan_sic_key=$(openssl rand -base64 32 | tr -dc '[:alnum:]' | cut -c1-32)
+  TF_VAR_vwan_sic_key=$(openssl rand -base64 32 | tr -dc '[:alnum:]' | cut -c1-30)
   echo "Generated random key: $TF_VAR_vwan_sic_key"
   dotenvx set -f ../.env -fk ../.env.keys TF_VAR_vwan_sic_key "$TF_VAR_vwan_sic_key"
   echo "Saved to .env file."
