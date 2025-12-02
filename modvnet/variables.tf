@@ -36,6 +36,7 @@ variable "subnet_cidr" {
   type = string
 }
 
+
 # variable "fw_enabled" {
 #   description = "Enable Route via Firewall"
 #   type        = bool
