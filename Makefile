@@ -46,6 +46,11 @@ vmss-info:
 	cd vmss && ./info.sh
 vmss-cme:
 	cd vmss && ./cme.sh
+vmss-fwon:
+	cd linux && ./fwon.sh
+vmss-fwoff:
+	cd linux && ./fwoff.sh
+
 
 ### POLICY
 
