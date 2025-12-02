@@ -51,3 +51,5 @@ policy/fingerprints.json
 
 _flowlogs/
 
+.env.keys.prev
+.env.prev
