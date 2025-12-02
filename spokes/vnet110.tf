@@ -32,4 +32,7 @@ module "linux110" {
     subscriptionId = var.subscriptionId
 
     subnet_id = module.vnet110.first_subnet_id
+
+    myip = var.myip
+    
 }

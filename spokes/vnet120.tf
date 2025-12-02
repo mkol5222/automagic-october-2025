@@ -28,4 +28,6 @@ module "linux120" {
     subscriptionId = var.subscriptionId
 
     subnet_id = module.vnet120.first_subnet_id
+
+    myip = var.myip
 }
